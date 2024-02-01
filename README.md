@@ -19,15 +19,21 @@ https://ubai.uos.ac.kr/forum/view/767800
 <br>
 
 ## 프로젝트 주제
-토지특성 파악을 위한 인공지능 알고리즘 구축이 지정 주제였으며 3개의 소주제 중 하나를 선택하여 모델을 개발하는 것이 목표였습니다. 저희 조는 그 중에서 '딥러닝 또는 머신러닝을 통한 토지특성 정보 구축(지형 형상)'을 선택하였으며 대상지로는 동대문구를 선정하였습니다.
+- 토지특성 파악을 위한 인공지능 알고리즘 구축이 지정 주제였으며 3개의 소주제 중 하나를 선택하여 모델을 개발하는 것이 목표
+- 그 중에서 '딥러닝 또는 머신러닝을 통한 토지특성 정보 구축(지형 형상)'을 선택하였으며 대상지로는 동대문구를 선정
 
 
 <br>
 
 ## 프로젝트 목표
-![image](https://github.com/ha789ha/lx_ubai/assets/108510929/94e401f5-d314-4a53-b396-47b98434cda9)
+<div align='center'>
+<img src='https://github.com/ha789ha/lx_ubai/assets/108510929/94e401f5-d314-4a53-b396-47b98434cda9'>
+</div>
+<br>
 
-국토교통부에서는 표준지 토지특성 조사요령에서 지형 형상의 구분 기준을 제시하고 있습니다. 이를 AI모델을 통해 수기가 아닌 자동으로 지형 형상을 구분해주는 모델을 개발하는 것이 목표였으며, 이를 위해 객체 탐지 종류의 하나인 instance segmentation 모델을 사용하기로 하였습니다. 그 중에서 1-stage detector로 돼있어 속도가 빠르고 비교적 정확도가 높은 YoloV5 모델을 사용하였습니다.
+- 국토교통부에서는 표준지 토지특성 조사요령에서 지형 형상의 구분 기준을 제시하고 있음
+- 이를 AI모델을 통해 수기가 아닌 자동으로 지형 형상을 구분해주는 모델을 개발하는 것이 목표
+- 이를 위해 객체 탐지 종류의 하나인 instance segmentation 모델을 사용하기로 하였으며 그 중에서 1-stage detector로 돼있어 속도가 빠르고 비교적 정확도가 높은 YoloV5 모델을 사용
 
 <br>
 
@@ -53,34 +59,49 @@ https://ubai.uos.ac.kr/forum/view/767800
 
 ## 데이터 제작
 <div align='center'>
-<img width="464" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/8038fefb-947d-481d-8343-c4260f5fff54">
+  
+|**원본 데이터**|
+| :---: |
+|<img width="464" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/8038fefb-947d-481d-8343-c4260f5fff54">|
+
 </div>
 
-토지형상의 데이터는 위와 같이 Shp파일로 돼있었습니다. 이를 instance segmentation에 훈련 데이터로 사용하기 위해서는 가공을 통해 구역을 나눌 필요가 있었습니다. 이를 위해 Shp 파일 편집 프로그램인 Rhino6를 사용하였습니다.
+
+- 토지형상의 데이터는 위와 같이 Shp파일로 돼있었으며 nstance segmentation에 훈련 데이터로 사용하기 위해서는 가공을 통해 구역을 나눌 필요 존재
+- 이를 위해 Shp 파일 편집 프로그램인 Rhino6를 사용
+<br>
 
 <div align='center'>
-<img width="800" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/aa920396-5242-4293-838d-41192379f3ae">
+  
+|**가공 데이터**|
+| :---: |
+|<img width="800" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/aa920396-5242-4293-838d-41192379f3ae">|
 </div>
 
-따라서 다음과 같이 2,3개씩 그룹을 묶어 이미지를 제작하였으며 yolov5 labeling을 위해 우측의 이미지와 같이 색을 통해 구분해주었습니다. 또한 좌측의 이미지와 같이 색을 없앤 훈련 데이터 또한 쌍으로 만들어주었습니다.
+- 다음과 같이 2,3개씩 그룹을 묶어 이미지를 제작하였으며 yolov5 labeling을 위해 우측의 이미지와 같이 색을 통해 구분
+- 또한 좌측의 이미지와 같이 색을 없앤 훈련 데이터 또한 쌍으로 생성
 
 <br>
 
 ## 데이터 전처리
+<div align='center'>
 <img width="500" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/c68fbf41-641a-4c17-bc16-8865c33f2622">
+</div>
 
   1. labelig
-    본격적인 라벨링을 위해서 cv2 라이브러리의 findContour 함수를 사용하여 외곽선을 검출하였습니다. 그 후, Teh-Chin 근사 알고리즘을 적용하여 클래스 별로 굴곡점의 포인트를 추출하고 좌표를 txt파일에 저장하였습니다.
+    본격적인 라벨링을 위해서 cv2 라이브러리의 findContour 함수를 사용하여 외곽선을 검출, 그 후 Teh-Chin 근사 알고리즘을 적용하여 클래스 별로 굴곡점의 포인트를 추출하고 좌표를 txt파일에 저장
 
   2. train/test split
-    train-test split 함수를 통해 8:1:1의 비율로 학습, 검증, 평가 데이터셋을 나누었습니다.
+    train-test split 함수를 통해 8:1:1의 비율로 학습, 검증, 평가 데이터셋 분할
 <br>
 
 ## 모델 학습
-학습에 사용한 yolov5모델은 [ultralytics](https://github.com/ultralytics/yolov5)의 소스를 사용하였습니다. 이 때, 모델 학습 시 사용할 데이터의 경로, 클래스를 정의하기 위한 yaml파일을 생성하였습니다. 학습에 사용된 파라미터는 아래와 같습니다.
-<br>
-<img width="563" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/81316ee8-34b0-4a39-b455-e9af86e83444">
+- 학습에 사용한 yolov5모델은 [ultralytics](https://github.com/ultralytics/yolov5)의 소스를 사용하였으며 이 때, 모델 학습 시 사용할 데이터의 경로, 클래스를 정의하기 위한 yaml파일을 생성
 
+<br>
+
+## 하이퍼 파라미터
+<img width="563" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/81316ee8-34b0-4a39-b455-e9af86e83444">
 
 
 ## Code
@@ -134,15 +155,20 @@ python train.py --img 640 --epochs 300 --batch-size 16 --data lx_ubai/dataset.ya
 <br>
 
 ## 프로젝트 결과
-전체적으로 Precision 0.565, Recall 0.720을 기록하였습니다. 생각보다는 성능이 좋지 않아 원인을 분석해보았는데 크게 두 가지가 존재하였습니다.
+- 전체적으로 Precision 0.565, Recall 0.720을 기록, 전체적인 성능의 수준이 좋지 않아 분석한 결과, 크게 두 가지 원인이 존재
 
-<img width="500" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/fda8c0ad-56d7-488d-bad9-671b78a7a764">
+1. 국토교통부에서 정한 기준 자체에서 오류 존재
+<div align='center'>
+<img width="400" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/fda8c0ad-56d7-488d-bad9-671b78a7a764">
+</div>
+위 사진은 '세로장방형'으로 분류된 객체이나 토지의 넒은 면이 도로와 접하고 있어 '가로장방형'에 가까움
 
-첫 째, 국토교통부에서 정한 기준 자체에서 오류가 존재하였습니다. 위 사진은 '세로장방형'으로 분류된 객체이나 토지의 넒은 면이 도로와 접하고 있어 '가로장방형'에 가깝습니다.
-
-<img width="500" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/7a995133-21cf-42c3-8f95-b58cf389be26">
-
-두 번째는 분류 기준의 모호함입니다. 위의 객체는 '정방형'으로 분류된 객체입니다. 국토교통부에서는 '장방형'과 '정방형'에 대해 구분하고 있는데 내각을 보면 '정방형'보다는 '장방형'에 가까운 것을 알 수 있습니다.
+2. 분류 기준의 모호함
+<div align='center'>
+<img width="400" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/7a995133-21cf-42c3-8f95-b58cf389be26">
+</div>
+  - 위의 객체는 '정방형'으로 분류된 객체
+  - 국토교통부에서는 '장방형'과 '정방형'에 대해 구분하고 있는데 내각을 보면 '정방형'보다는 '장방형'에 가까운 것을 알 수 있음
 
 ## 프로젝트 후기
 위의 결과를 토대로 AI 모델의 결과의 아쉬움에 대해 원인을 분석하였고 분류 기준에 대한 중요성을 역설하였습니다. 이는 많은 심사위원들의 공감을 사 대회를 1등으로 마무리 할 수 있었습니다.<br>
