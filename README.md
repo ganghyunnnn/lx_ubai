@@ -70,7 +70,7 @@ https://ubai.uos.ac.kr/forum/view/767800
 </div>
 
 
-- 토지형상의 데이터는 위와 같이 Shp파일로 돼있었으며 nstance segmentation에 훈련 데이터로 사용하기 위해서는 가공을 통해 구역을 나눌 필요 존재
+- 토지형상의 데이터는 위와 같이 Shp파일로 돼있었으며 instance segmentation에 훈련 데이터로 사용하기 위해서는 가공을 통해 구역을 나눌 필요 존재
 - 이를 위해 Shp 파일 편집 프로그램인 Rhino6를 사용
 <br>
 
