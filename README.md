@@ -5,10 +5,13 @@
 4. [개발 기간 및 수행 절차](#개발-기간-및-수행-절차)
 5. [데이터 제작](#데이터-제작)
 6. [모델 학습](#모델-학습)
-7. [Code](#Code)
-8. [훈련 결과](#훈련-결과)
-9. [프로젝트 결과](#프로젝트-결과)
-10. [프로젝트 후기](#프로젝트-후기)
+7. [하이퍼 파라미터](#하이퍼-파라미터)
+8. [Code](#Code)
+9. [훈련 결과](#훈련-결과)
+10. [프로젝트 결과](#프로젝트-결과)
+11. [프로젝트 후기](#프로젝트-후기)
+12. [참조](#참조)
+13. [제출물](#제출물)
 <br>
 <br>
 
@@ -110,8 +113,8 @@ https://ubai.uos.ac.kr/forum/view/767800
   
 2. Clone this repository:
 ```bash
-git clone https://github.com/yl4579/StyleTTS2.git
-cd StyleTTS2
+git clone https://github.com/ha789ha/lx_ubai.git
+cd lx_ubai
 ```
 
 3. generate label:
@@ -155,22 +158,33 @@ python train.py --img 640 --epochs 300 --batch-size 16 --data lx_ubai/dataset.ya
 <br>
 
 ## 프로젝트 결과
-- 전체적으로 Precision 0.565, Recall 0.720을 기록, 전체적인 성능의 수준이 좋지 않아 분석한 결과, 크게 두 가지 원인이 존재
+전체적으로 Precision 0.565, Recall 0.720을 기록, 전체적인 성능의 수준이 좋지 않아 분석한 결과, 크게 두 가지 원인이 존재
 
-1. 국토교통부에서 정한 기준 자체에서 오류 존재
+<h3>1. 국토교통부에서 정한 기준 자체에서 오류 존재</h3>
 <div align='center'>
 <img width="400" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/fda8c0ad-56d7-488d-bad9-671b78a7a764">
 </div>
+<br>
 위 사진은 '세로장방형'으로 분류된 객체이나 토지의 넒은 면이 도로와 접하고 있어 '가로장방형'에 가까움
 
-2. 분류 기준의 모호함
+<h3>2. 분류 기준의 모호함</h3>
 <div align='center'>
 <img width="400" alt="image" src="https://github.com/ha789ha/lx_ubai/assets/108510929/7a995133-21cf-42c3-8f95-b58cf389be26">
 </div>
-  - 위의 객체는 '정방형'으로 분류된 객체
-  - 국토교통부에서는 '장방형'과 '정방형'에 대해 구분하고 있는데 내각을 보면 '정방형'보다는 '장방형'에 가까운 것을 알 수 있음
+<br>
+위의 객체는 '정방형'으로 분류된 객체, 국토교통부에서는 '장방형'과 '정방형'에 대해 구분하고 있는데 내각을 보면 '정방형'보다는 '장방형'에 가까운 것을 알 수 있음
 
 ## 프로젝트 후기
 위의 결과를 토대로 AI 모델의 결과의 아쉬움에 대해 원인을 분석하였고 분류 기준에 대한 중요성을 역설하였습니다. 이는 많은 심사위원들의 공감을 사 대회를 1등으로 마무리 할 수 있었습니다.<br>
 이전 Dacon이나 Kaggle 같은 대회에서는 잘 정제된 데이터를 토대로 모델 성능을 끌어올리는 데에만 집중했다면 이번 공모전을 통해 데이터 제작, 전처리, 모델 훈련까지 end to end로 경험할 수 있었고 데이터의 중요성을 느낄 수 있는 공모전이었습니다.
+
+## 참조
+- [국토교통부 2023년도 표준지공시지가 조사평가 업무요령](http://www.molit.go.kr/USR/policyData/m_34681/dtl.jsp?id=4644)
+- [YOLOV5](https://github.com/ultralytics/yolov5)
+
+
+## 제출물
+자세한 내용은 아래의 보고서를 참고해주시면 감사하겠습니다.
+<br>
+[공간 정보 활용 공모전 보고서](https://github.com/ha789ha/lx_ubai/files/14123467/default.pdf)
 
