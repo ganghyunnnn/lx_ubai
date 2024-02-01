@@ -1,0 +1,12 @@
+path: dataset
+train: train/images
+val: val/images
+test: test/images
+
+# class
+names:
+  0: trapezoid
+  1: vert_long
+  2: hori_long
+  3: square
+
